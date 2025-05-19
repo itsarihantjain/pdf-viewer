@@ -31,7 +31,8 @@ A modern, feature-rich PDF viewer built with React, TypeScript, and Vite. This a
 ## Contributing
 
 1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+2. Clone your forked repository:
+   ```sh
+   git clone https://github.com/your-username/pdf-viewer.git
+   cd pdf-viewer
+   ```
