@@ -104,12 +104,15 @@ const TextHighlighter = ({
               termIndex,
             });
 
-            const isCurrentMatch = searchMatches.some(
-              (match) =>
-                match.pageIndex === pageIndex &&
-                match.matchIndex === matchCount - 1 &&
-                searchMatches.indexOf(match) === currentMatchIndex
-            );
+            const isCurrentMatch = searchMatches.length > 0 &&
+              currentMatchIndex >= 0 &&
+              currentMatchIndex < searchMatches.length &&
+              searchMatches.some(
+                (match) =>
+                  match.pageIndex === pageIndex &&
+                  match.matchIndex === matchCount - 1 &&
+                  searchMatches.indexOf(match) === currentMatchIndex
+              );
 
             if (isCurrentMatch) {
               highlightEl.style.backgroundColor =

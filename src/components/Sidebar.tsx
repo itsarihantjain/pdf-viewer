@@ -98,9 +98,11 @@ const Sidebar = () => {
   }, [searchQuery, setSearchParams, setCurrentPage]);
 
   useEffect(() => {
-    if (currentMatchIndex >= 0 && searchMatches.length > 0) {
+    if (currentMatchIndex >= 0 && searchMatches.length > 0 && currentMatchIndex < searchMatches.length) {
       const match = searchMatches[currentMatchIndex];
-      setCurrentPage(match.pageIndex + 1);
+      if (match) {
+        setCurrentPage(match.pageIndex + 1);
+      }
     }
   }, [currentMatchIndex, searchMatches, setCurrentPage]);
 
@@ -214,7 +216,9 @@ const Sidebar = () => {
                 <button
                   key={`${match.pageIndex}-${match.matchIndex}`}
                   onClick={() => {
-                    setCurrentMatchIndex(index);
+                    if (index >= 0 && index < searchMatches.length) {
+                      setCurrentMatchIndex(index);
+                    }
                   }}
                   className={`w-full p-3 md:p-4 text-left hover:bg-gray-50 transition-colors ${index === currentMatchIndex ? 'bg-gray-50' : ''}`}
                 >

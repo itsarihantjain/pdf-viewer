@@ -86,20 +86,22 @@ const PdfViewer = () => {
   }, [file, currentPage, setCurrentPage]);
 
   useEffect(() => {
-    if (currentMatchIndex >= 0 && searchMatches.length > 0) {
+    if (currentMatchIndex >= 0 && searchMatches.length > 0 && currentMatchIndex < searchMatches.length) {
       const match = searchMatches[currentMatchIndex];
-      setCurrentPage(match.pageIndex + 1);
+      if (match) {
+        setCurrentPage(match.pageIndex + 1);
 
-      setTimeout(() => {
-        const pageDiv = pageRefs.current[match.pageIndex];
-        if (pageDiv) {
-          pageDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          const textLayer = pageDiv.querySelector('.react-pdf__Page__textContent');
-          if (textLayer) {
-            textLayer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        setTimeout(() => {
+          const pageDiv = pageRefs.current[match.pageIndex];
+          if (pageDiv) {
+            pageDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            const textLayer = pageDiv.querySelector('.react-pdf__Page__textContent');
+            if (textLayer) {
+              textLayer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
           }
-        }
-      }, 150);
+        }, 150);
+      }
     }
   }, [currentMatchIndex, searchMatches, setCurrentPage]);
 
@@ -108,13 +110,19 @@ const PdfViewer = () => {
       if (e.key === 'F3' || (e.ctrlKey && e.key === 'g')) {
         e.preventDefault();
         if (searchMatches.length > 0) {
-          setCurrentMatchIndex((currentMatchIndex + 1) % searchMatches.length);
+          const nextIndex = (currentMatchIndex + 1) % searchMatches.length;
+          if (nextIndex >= 0 && nextIndex < searchMatches.length) {
+            setCurrentMatchIndex(nextIndex);
+          }
         }
       }
       else if ((e.shiftKey && e.key === 'F3') || (e.ctrlKey && e.shiftKey && e.key === 'G')) {
         e.preventDefault();
         if (searchMatches.length > 0) {
-          setCurrentMatchIndex((currentMatchIndex - 1 + searchMatches.length) % searchMatches.length);
+          const nextIndex = (currentMatchIndex - 1 + searchMatches.length) % searchMatches.length;
+          if (nextIndex >= 0 && nextIndex < searchMatches.length) {
+            setCurrentMatchIndex(nextIndex);
+          }
         }
       }
     };
