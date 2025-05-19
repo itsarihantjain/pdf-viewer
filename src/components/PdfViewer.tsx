@@ -181,28 +181,32 @@ const PdfViewer = () => {
                   ref={setPageRef(index)}
                   data-page-number={index + 1}
                   style={{
-                    display: searchQuery || index + 1 === currentPage ? 'block' : 'none'
+                    display: searchQuery || index + 1 === currentPage ? 'block' : 'none',
+                    padding: 0,
+                    margin: 0,
                   }}
                 >
-                  <Page
-                    pageNumber={index + 1}
-                    scale={scale}
-                    className="shadow-lg bg-gray-50 rounded-lg w-full"
-                    width={window.innerWidth - (sidebarOpen ? 380 : 120)}
-                    loading={
-                      <div className="w-full aspect-[1/1.4] bg-gray-50 rounded-lg flex items-center justify-center">
-                        <div className="w-8 h-8 border-4 border-gray-200 border-t-gray-600 rounded-full animate-spin"></div>
-                      </div>
-                    }
-                  >
-                    {searchQuery && (
-                      <TextHighlighter
-                        searchQuery={searchQuery}
-                        pageIndex={index}
-                        currentMatchIndex={currentMatchIndex}
-                      />
-                    )}
-                  </Page>
+                  <div className="pdf-page-container" style={{ display: 'inline-block', width: 'auto', height: 'auto', background: 'transparent', padding: 0, margin: 0 }}>
+                    <Page
+                      pageNumber={index + 1}
+                      scale={scale}
+                      className="shadow-lg bg-gray-50 rounded-lg w-full"
+                      width={window.innerWidth - (sidebarOpen ? 380 : 120)}
+                      loading={
+                        <div className="w-full aspect-[1/1.4] bg-gray-50 rounded-lg flex items-center justify-center">
+                          <div className="w-8 h-8 border-4 border-gray-200 border-t-gray-600 rounded-full animate-spin"></div>
+                        </div>
+                      }
+                    >
+                      {searchQuery && (
+                        <TextHighlighter
+                          searchQuery={searchQuery}
+                          pageIndex={index}
+                          currentMatchIndex={currentMatchIndex}
+                        />
+                      )}
+                    </Page>
+                  </div>
                 </div>
               ))}
             </Document>

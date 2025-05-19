@@ -74,14 +74,6 @@ const Sidebar = () => {
     });
   };
 
-  // useEffect(() => {
-  //   clearSearch();
-  //   // Force clear URL params
-  //   window.history.replaceState({}, '', window.location.pathname);
-  //   setSearchParams({}, { replace: true });
-  // }, []);
-
-
   useEffect(() => {
     const query = searchParams.get("q");
     if (query && searchQuery === "") {

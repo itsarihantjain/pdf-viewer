@@ -1,4 +1,4 @@
-import { Menu, FileUp } from "lucide-react";
+import { FileUp } from "lucide-react";
 import { useAppStore } from "../store";
 
 export default function Header() {
@@ -14,14 +14,7 @@ export default function Header() {
   return (
     <header className="border-b border-gray-100 bg-gray-50 shadow-sm">
       <div className="container mx-auto px-3 md:px-4 h-14 md:h-16 flex items-center justify-between">
-        <div className="flex items-center space-x-3 md:space-x-4">
-          <button
-            onClick={toggleSidebar}
-            className="p-1.5 md:p-2 rounded-md hover:bg-gray-100 transition-colors"
-            aria-label="Toggle sidebar"
-          >
-            <Menu size={20} className="text-gray-600" />
-          </button>
+        <div className="flex items-center">
           <h1 className="text-lg md:text-xl font-semibold text-gray-800 flex items-center">
             PDF Viewer
           </h1>
